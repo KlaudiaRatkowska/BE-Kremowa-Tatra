@@ -19,7 +19,7 @@ jobs:
       uses: docker/build-push-action@v2
       with:
         context: .
-        file: ./path/to/Dockerfile/mysql  # Adjust the path to your MySQL Dockerfile
+        file: ./Dockerfile/mysql 
         push: true
         tags: ghcr.io/${{ github.repository_owner }}/mysql:latest
 
@@ -27,6 +27,6 @@ jobs:
       uses: docker/build-push-action@v2
       with:
         context: .
-        file: ./path/to/Dockerfile/prestashop  # Adjust the path to your PrestaShop Dockerfile
+        file: ./Dockerfile/prestashop  
         push: true
         tags: ghcr.io/${{ github.repository_owner }}/prestashop:latest
