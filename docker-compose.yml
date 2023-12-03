@@ -1,0 +1,32 @@
+version: '3.9'
+services:
+  mysql:
+    container_name: prestashop-db
+    image: mysql:8
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: prestashop
+      MYSQL_DATABASE: prestashop
+    networks:
+      - prestashop
+  prestashop:
+    container_name: prestashop
+    image: prestashop/prestashop:1.7.8
+    restart: unless-stopped
+    depends_on:
+      - mysql
+    ports:
+      - 8080:80
+      - 8443:443
+    volume:
+      - ./apache-config:/etc/apache2/sites-available
+       - ./src:/var/www/html
+    environment:
+      DB_SERVER: mysql
+      DB_NAME: prestashop
+      DB_USER: root
+      DB_PASSWD: prestashop
+    networks:
+      - prestashop
+networks:
+    prestashop:
